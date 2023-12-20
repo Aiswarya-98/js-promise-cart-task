@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MY CART</title>
+
+    <!-- goole fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Acme&family=Barlow:wght@100&family=Cabin&family=Cousine&family=Croissant+One&family=Dancing+Script&family=Merriweather+Sans&family=Poppins:wght@500;700&family=Raleway:ital,wght@1,400;1,800;1,900&family=Ramaraja&family=Roboto&family=Shadows+Into+Light&family=Young+Serif&display=swap" rel="stylesheet" />
+
+    <!-- css -->
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="title">
+        <h1>MY SHOPPING CART</h1>
+      </div>
+
+      <!-- card section -->
+      <div class="card-container" id="result">
+        <!-- each card container -->
+      </div>
+    </div>
+
+    <script>
+      fetch("https://dummyjson.com/carts")
+        .then((data) => data.json())
+        .then((cartArray) => displayData(cartArray))
+
+      function displayData(cartArray) {
+        // for(let item of cartArray){
+        //   for(let product of item.products){
+
+        if (cartArray && cartArray.carts) {
+          // if (cartArray && cartArray.carts) checks if cartArray
+          //  exists and has a property named "carts."
+          // This is a precautionary measure to ensure that the
+          // expected data structure is present.
+
+          // cartArray.carts.forEach(cart => { ... }): Iterates over each "cart" in the "carts" array. Each
+          // cart has a property called "products," which is an array of
+          // products.
+
+          // cart.products.forEach(product => { ... }): Iterates over each "product"
+          // in the "products" array of the current cart.
+
+          cartArray.carts.forEach((cart) => {
+            cart.products.forEach((product) => {
+              htmlData = `
+      <div class="main-card" >
+      <div class="img-sec">
+      <img src="${product.thumbnail}" alt="thumbnail">
+    
+    </div>
+
+    <div class="desc">
+      <h6>ITEM ID:${product.id}</h6>
+      <h2>${product.title}</h2>
+     
+      <h5>QUANTITY: ${product.quantity}</h5>
+      <h5>TOTAL: ${product.total}</h5>
+      <h5>DISCOUNT: ${product.discountedPrice}</h5>
+      <p>$${product.price}</p>
+    </div>
+    </div>`
+              result.innerHTML += htmlData
+            })
+          })
+        }
+      }
+    </script>
+  </body>
+</html>
